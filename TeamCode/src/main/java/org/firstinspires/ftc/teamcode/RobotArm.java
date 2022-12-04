@@ -8,8 +8,11 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.BatteryChecker;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.openftc.apriltag.AprilTagDetection;
@@ -18,7 +21,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 @TeleOp()
 public class RobotArm extends OpMode{
     Servo claw;
-
+    RevBlinkinLedDriver lighting = null;
     int maxArmPos;
     int minArmPos;
     boolean runtoSet = false;
@@ -69,6 +72,8 @@ public class RobotArm extends OpMode{
     //https://github.com/FTCLib/FTCLib
     //https://github.com/FIRST-Tech-Challenge/FtcRobotController/wiki/Java-Sample-Op-Mode-for-TensorFlow-Object-Detection
     public void init() {
+        lighting = hardwareMap.get(RevBlinkinLedDriver.class,"lighting");
+
         claw = hardwareMap.get(Servo.class, "Servo");
 
         leftMotor = hardwareMap.get(DcMotor.class, "backL");
@@ -101,10 +106,14 @@ public class RobotArm extends OpMode{
 
         telemetry.setAutoClear(false);
 
+
     }
 
     public void setSyncMotorPosition(DcMotor motor1, DcMotor motor2, int targetPosition, double power)
     {
+
+
+
         motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -138,7 +147,7 @@ public class RobotArm extends OpMode{
 
     public void loop() {
         telemetry.clear();
-
+            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_RED);
         // Claw Code
         if(gamepad2.b) {
             // open

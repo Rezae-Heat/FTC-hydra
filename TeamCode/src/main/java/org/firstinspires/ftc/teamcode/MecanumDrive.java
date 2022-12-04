@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 
 @TeleOp()
 public class MecanumDrive extends OpMode {
@@ -13,6 +14,7 @@ public class MecanumDrive extends OpMode {
 
     DcMotor frontLMotor = null;
     DcMotor frontRMotor = null;
+    RevBlinkinLedDriver lighting = null;
 
     public void init() {
         // passings hardware setups to the motors
@@ -21,10 +23,13 @@ public class MecanumDrive extends OpMode {
 
         frontLMotor = hardwareMap.get(DcMotor.class, "frontL");
         frontRMotor = hardwareMap.get(DcMotor.class, "frontR");
+        lighting = hardwareMap.get(RevBlinkinLedDriver.class, "lighting");
     }
 
     public void loop() {
-
+        if (gamepad2.a) {
+            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_RED);
+        }
         // assign speed modifier
         int speedMod = 2;
 
