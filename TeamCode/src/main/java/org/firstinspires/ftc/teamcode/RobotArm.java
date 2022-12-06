@@ -147,7 +147,12 @@ public class RobotArm extends OpMode{
 
     public void loop() {
         telemetry.clear();
-            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.DARK_RED);
+        if (gamepad2.x) {
+            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.LIGHT_CHASE_RED);
+        }
+        else {
+            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_BLUE);
+        }
         // Claw Code 
         if(gamepad2.b) {
             // open
