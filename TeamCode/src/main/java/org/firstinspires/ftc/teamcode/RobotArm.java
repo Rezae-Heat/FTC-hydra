@@ -133,7 +133,7 @@ public class RobotArm extends OpMode{
                     .addData("targetPosition", targetPosition)
                     .addData("armMotor1Position", motor1.getCurrentPosition())
                     .addData("armMotor2Position", motor2.getCurrentPosition())
-                    .addData("isOnTarget", isOnTarget)
+                    .addData("isOnTarget", isOnTarget) // ideal val being met
                     .addData("armMotor1Power", motor1.getPower())
                     .addData("armMotor2Power", motor2.getPower());
             telemetry.update();
@@ -147,11 +147,11 @@ public class RobotArm extends OpMode{
 
     public void loop() {
         telemetry.clear();
-        if (gamepad2.x) {
+        if () {
             lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.LIGHT_CHASE_RED);
         }
         else {
-            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_BLUE);
+            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.);
         }
         // Claw Code 
         if(gamepad2.b) {
