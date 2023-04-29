@@ -28,6 +28,10 @@ public class RobotArm extends OpMode{
 
     String currentClawState = "closed";
 
+
+
+
+
     DcMotor leftMotor = null;
     DcMotor rightMotor = null;
 
@@ -147,11 +151,11 @@ public class RobotArm extends OpMode{
 
     public void loop() {
         telemetry.clear();
-        if () {
+        if (gamepad2.x) {
             lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.LIGHT_CHASE_RED);
         }
         else {
-            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.);
+            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_GRAY);
         }
         // Claw Code 
         if(gamepad2.b) {
@@ -196,12 +200,12 @@ public class RobotArm extends OpMode{
                 RoboArmNum = maxArmPos;
 
                 // Make zoom zoom
-                ArmMotor1.setVelocity(1200);
-                ArmMotor2.setVelocity(1200);
+                ArmMotor1.setVelocity(1200); // how does .setVelocity work?
+                ArmMotor2.setVelocity(1200); // .setVelocity is used when RUN_USING_ENCODER or RUN_TO_POSITION motor modes have been enabled
             } else if (gamepad2.left_trigger > 0.5) {
                 RoboArmNum = minArmPos;
 
-                // Make not so zoom zoom so servo doesn't die
+                // slows the servo speed, to ensure a balanced load on the servo
                 ArmMotor1.setVelocity(800);
                 ArmMotor2.setVelocity(800);
             }

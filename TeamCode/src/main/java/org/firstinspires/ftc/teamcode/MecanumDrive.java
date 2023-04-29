@@ -9,8 +9,8 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 public class MecanumDrive extends OpMode {
 
     // creates 2 empty objects for motorsj
-    DcMotor leftMotor = null;
-    DcMotor rightMotor = null;
+    DcMotor backLMotor = null;
+    DcMotor backRMotor = null;
 
     DcMotor frontLMotor = null;
     DcMotor frontRMotor = null;
@@ -18,8 +18,8 @@ public class MecanumDrive extends OpMode {
 
     public void init() {
         // passings hardware setups to the motors
-        leftMotor = hardwareMap.get(DcMotor.class, "backL");
-        rightMotor = hardwareMap.get(DcMotor.class, "backR");
+        backLMotor = hardwareMap.get(DcMotor.class, "backL");
+        backRMotor = hardwareMap.get(DcMotor.class, "backR");
 
         frontLMotor = hardwareMap.get(DcMotor.class, "frontL");
         frontRMotor = hardwareMap.get(DcMotor.class, "frontR");
@@ -28,7 +28,7 @@ public class MecanumDrive extends OpMode {
 
     public void loop() {
         if (gamepad2.a) {
-            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_RED);
+            lighting.setPattern(RevBlinkinLedDriver.BlinkinPattern.CP2_BREATH_FAST);
         }
         // assign speed modifier
         int speedMod = 2;
@@ -52,8 +52,8 @@ public class MecanumDrive extends OpMode {
 
         frontLMotor.setPower(v1 / speedMod);
         frontRMotor.setPower(v2 / speedMod);
-        leftMotor.setPower(v3 / speedMod);
-        rightMotor.setPower(v4 / speedMod);
+        backLMotor.setPower(v3 / speedMod);
+        backRMotor.setPower(v4 / speedMod);
 
         /*from https://ftcforum.firstinspires.org/forum/
         ftc-technology/android-studio/6361-mecanum-wheels-drive-code-example
